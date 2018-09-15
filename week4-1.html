@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>week4-1</title>
+</head>
+<style type="text/css">
+.wrapper {
+	width: 278px;
+	margin: 100px auto;
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+.answer {
+	height: 52px;
+	border: 1px solid #ddd;
+	text-align: right;
+	padding-right: 10px;
+	font-size: 36px;
+}
+.row {
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
+	margin: 10px 0;
+}
+.row li {
+	display: inline-block;
+	text-align: center;
+	border: 1px solid #ddd;
+	width: 40px;
+	list-style: none;
+	padding: 5px 10px;
+}
+.row li:hover {
+	background: #efefef;
+	cursor: pointer;
+}
+.row li.equal {
+	width: 112px;
+	background: orange;
+	border: none;
+}
+.btns {
+	margin-top: 10px;
+}
+.btns ul:last-child {
+	margin-bottom: 0px;
+}
+
+</style>
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded',() => {
+		var tmp = 0
+		var operator = ''
+		var pressoperator = false
+		document.querySelector('.btns').addEventListener('click', e => {
+			var answer = document.querySelector('.answer')
+		
+				if(e.target.className === 'number') {
+					if (pressoperator == false) {
+						answer.innerText += e.target.innerText
+						console.log(answer.innerText)
+					}
+					if (pressoperator == true) {
+						answer.innerText = ''
+						answer.innerText = e.target.innerText
+						pressoperator = false
+						console.log(answer.innerText)
+					}
+				} 
+
+				if(e.target.className === 'operator'){
+	        tmp = answer.innerText;
+					operator = e.target.innerText;
+					pressoperator = true
+					console.log(tmp + operator)
+	      }
+	      if(e.target.className === 'equal') {
+					if(operator == '+') answer.innerText = parseInt(tmp) + parseInt(answer.innerText)
+					if(operator == '-') answer.innerText = parseInt(tmp) - parseInt(answer.innerText)
+					if(operator == '×') answer.innerText = parseInt(tmp) * parseInt(answer.innerText)
+					if(operator == '÷') answer.innerText = parseInt(tmp) / parseInt(answer.innerText)
+ 				}
+	 			if(e.target.className === 'ac') {
+					answer.innerText = '0'
+					pressoperator = false
+				}			
+		})
+	})
+	
+</script>
+<body>
+	<div class="wrapper">
+		<div class="answer">0</div>
+		<div class="btns">
+			<ul class="row">
+				<li class="ac">AC</li>
+				<li class="operator">÷</li>
+			</ul>
+			<ul class="row">
+				<li class="number">7</li>
+				<li class="number">8</li>
+				<li class="number">9</li>
+				<li class="operator">×</li>
+			</ul>
+			<ul class="row">
+				<li class="number">4</li>
+				<li class="number">5</li>
+				<li class="number">6</li>
+				<li class="operator">-</li>
+			</ul>
+			<ul class="row">
+				<li class="number">1</li>
+				<li class="number">2</li>
+				<li class="number">3</li>
+				<li class="operator">+</li>
+			</ul>
+			<ul class="row">
+				<li class="number">0</li>
+				<li>.</li>
+				<li class="equal">=</li>
+			</ul>
+		</div>
+	</div>
+	
+</body>
+<!-- <script type="text/javascript">
+var answer = document.querySelector('.answer')
+var Num1 = document.getElementById('Num1')
+
+Num1.onclick = function () {
+	answer.innerText = Num1.innerText
+}
+
+</script> -->
+</html>
